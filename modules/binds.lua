@@ -73,6 +73,8 @@ end, { description = "Switch focus between tiled and floating windows" })
 hl.bind(mainMod .. " + SHIFT + Return",   hl.dsp.exec_cmd(terminal .. " --hold -e " .. fastfetch))
 -- A quick terminal: floating and centred at 1080x720, not tiled. The rules only touch this launch.
 hl.bind(mainMod .. " + Return",           hl.dsp.exec_cmd(terminal, { float = true, size = "1080 720", center = true }))
+-- The coding agent (crush, talking to the local Ollama), in the same kind of floating terminal
+hl.bind(mainMod .. " + ALT + Return",     hl.dsp.exec_cmd(terminal .. " -e crush", { float = true, size = "1080 720", center = true }))
 hl.bind(mainMod .. " + E",                hl.dsp.exec_cmd(terminal .. " -e " .. fileManager))
 hl.bind(mainMod .. " + D",                hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + W",                hl.dsp.exec_cmd(browser))
