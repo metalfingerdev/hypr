@@ -6,9 +6,10 @@
 --   input.lua      keyboard, mouse, touchpad, gestures, devices
 --   look.lua       gaps, borders, the glass (opacity, blur, `glass` layer rule), animations
 --   monitors.lua   monitors
+--   plugins.lua    the window-rotate plugin and its binds
 --   rules.lua      window and workspace rules
 --
 -- session.lua (here, not in modules/) lists the programs that come with the session: autostart.lua
--- starts them, and Super+Shift+R restarts them along with the config.
+-- starts them, and Super+R restarts them along with the config.
 
 require("autoload")

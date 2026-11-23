@@ -58,7 +58,8 @@ hl.bind(mainMod .. " + SPACE", function()
 end, { description = "Switch focus between tiled and floating windows" })
 
 hl.bind(mainMod .. " + SHIFT + Return",   hl.dsp.exec_cmd(terminal .. " --hold -e " .. fastfetch))
-hl.bind(mainMod .. " + Return",           hl.dsp.exec_cmd(terminal))
+-- A quick terminal: floating and centred at 1080x720, not tiled. The rules only touch this launch.
+hl.bind(mainMod .. " + Return",           hl.dsp.exec_cmd(terminal, { float = true, size = "1080 720", center = true }))
 hl.bind(mainMod .. " + E",                hl.dsp.exec_cmd(terminal .. " -e " .. fileManager))
 hl.bind(mainMod .. " + D",                hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + W",                hl.dsp.exec_cmd(browser))
@@ -109,8 +110,9 @@ hl.bind(mainMod .. " + CTRL + K",  hl.dsp.window.move({ x = 0, y = -30, relative
 hl.bind(mainMod .. " + CTRL + J",  hl.dsp.window.move({ x = 0, y = 30,  relative = true }), { repeating = true })
 
 -- Example special workspace (scratchpad)
-hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+-- Escape is the Caps Lock key (caps:swapescape in input.lua)
+hl.bind(mainMod .. " + Escape",         hl.dsp.workspace.toggle_special("magic"))
+hl.bind(mainMod .. " + SHIFT + Escape", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
@@ -123,8 +125,8 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 -- Laptop multimedia keys for volume and LCD brightness
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
-hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
-hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
+hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true })
+hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true })
 hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),                  { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),                  { locked = true, repeating = true })
 

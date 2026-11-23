@@ -1,5 +1,5 @@
 -- The programs that come with the session: modules/autostart.lua starts them with Hyprland, and
--- Super+Shift+R (modules/binds.lua) reloads Hyprland's config and starts them over.
+-- Super+R (modules/binds.lua) reloads Hyprland's config and starts them over.
 -- Loaded with dofile (not require), so a reload always reads this file again.
 --
 --   start    how to start it

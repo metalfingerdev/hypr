@@ -1,4 +1,4 @@
--- Built and linked here by modules/features/hyprland.nix.
+-- Built and linked here by nixos-dotfiles' modules/features/hyprland/default.nix.
 hl.plugin.load(os.getenv("HOME") .. "/.local/lib/hyprland/plugins/hypr-window-rotate.so")
 
 -- Rotates the focused window, e.g. a sideways Firefox picture-in-picture video.
