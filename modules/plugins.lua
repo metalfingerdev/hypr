@@ -1,5 +1,10 @@
--- Built and linked here by nixos-dotfiles' modules/features/hyprland/default.nix.
-hl.plugin.load(os.getenv("HOME") .. "/.local/lib/hyprland/plugins/hypr-window-rotate.so")
+-- Built and linked here by nixos-dotfiles' modules/features/hyprland/default.nix, which leaves it out
+-- while it doesn't match Hyprland's version: then there's nothing to load, and no rotate binds.
+local plugin = os.getenv("HOME") .. "/.local/lib/hyprland/plugins/hypr-window-rotate.so"
+local file = io.open(plugin)
+if not file then return end
+file:close()
+hl.plugin.load(plugin)
 
 -- Rotates the focused window, e.g. a sideways Firefox picture-in-picture video.
 -- The arrow is where the window's top edge ends up pointing.
