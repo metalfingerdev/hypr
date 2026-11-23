@@ -48,6 +48,7 @@ hl.bind(mainMod .. " + SHIFT + TAB",      hl.dsp.exec_cmd("quickshell ipc call i
 hl.bind(mainMod .. " + P",                hl.dsp.exec_cmd("quickshell ipc call island cycle wallpapers 1"))
 hl.bind(mainMod .. " + SHIFT + P",        hl.dsp.exec_cmd("quickshell ipc call island cycle wallpapers -1"))
 hl.bind(mainMod .. " + SHIFT + V",        hl.dsp.exec_cmd("quickshell ipc call island cycle clipboard 1"))  -- the clipboard history
+hl.bind(mainMod .. " + period",           hl.dsp.exec_cmd("quickshell ipc call island launch emoji"))      -- emoji, symbols, kaomoji
 -- Super down and up, which those need: a global shortcut both ways, letting every other bind through.
 for _, sym in ipairs({ "Super_L", "Super_R" }) do
     hl.bind(sym, hl.dsp.global("quickshell:island-super"),
