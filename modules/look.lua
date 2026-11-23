@@ -87,6 +87,10 @@ hl.config({
     misc = {
         force_default_wallpaper = 1,    -- Set to 0 or 1 to disable the anime mascot wallpapers
         disable_hyprland_logo   = true, -- If true disables the random hyprland logo / anime girl background. :(
+        -- The lock screen lives in Quickshell. Should it die while locked, a new one may take the
+        -- lock over (it locks again as it starts); without this the session stays behind Hyprland's
+        -- fallback screen, which nothing unlocks: a TTY or a reboot.
+        allow_session_lock_restore = true,
     },
 })
 
@@ -100,8 +104,8 @@ hl.layer_rule({
 })
 
 -- Curves: plain beziers, none of them overshoots (no springs).
--- Glide is shared with Quickshell's island (Config.curve / motionMs: same points, 350 ms = speed 3.5),
--- so windows and the island move alike.
+-- Quickshell's island reads the windows animation from here (its curve and speed, Desktops.windowCurve),
+-- so windows and the island move alike: change it here and both follow on the next reload.
 hl.curve("Glide",   { type = "bezier", points = { {0.22, 1},    {0.36, 1}    } })  -- ease-out for movement
 hl.curve("Snap",    { type = "bezier", points = { {0.25, 0.1},  {0.25, 1}    } })  -- general smooth ease
 hl.curve("Close",   { type = "bezier", points = { {0.4,  0},    {0.6,  1}    } })  -- clean ease-in for close

@@ -26,7 +26,8 @@ hl.bind(mainMod .. " + CTRL + SPACE",     hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + ALT + SPACE",      hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + F",                hl.dsp.window.fullscreen())
 hl.bind(mainMod .. " + A",                hl.dsp.window.pin())
-hl.bind(mainMod .. " + Z",                hl.dsp.exec_cmd(lock))
+-- Works while locked too: if the lock screen died, this brings a new one.
+hl.bind(mainMod .. " + Z",                hl.dsp.exec_cmd(lock), { locked = true })
 hl.bind(mainMod .. " + R",                session.restart)
 
 -- Quickshell island
@@ -40,7 +41,18 @@ hl.bind(mainMod .. " + Y",                hl.dsp.exec_cmd("quickshell ipc call i
 hl.bind(mainMod .. " + N",                hl.dsp.exec_cmd("quickshell ipc call island open notifications"))
 hl.bind(mainMod .. " + V",                hl.dsp.exec_cmd("quickshell ipc call island open mixer"))      -- every app's volume
 
-hl.bind(mainMod .. " + TAB",              hl.dsp.exec_cmd("quickshell ipc call island open workspaces"))
+-- Held as Alt+Tab is (Quickshell's Held.qml): the first press opens the view, the key again with
+-- Super still down moves on (with Shift: back), letting go of Super picks the one reached.
+hl.bind(mainMod .. " + TAB",              hl.dsp.exec_cmd("quickshell ipc call island cycle workspaces 1"))
+hl.bind(mainMod .. " + SHIFT + TAB",      hl.dsp.exec_cmd("quickshell ipc call island cycle workspaces -1"))
+hl.bind(mainMod .. " + P",                hl.dsp.exec_cmd("quickshell ipc call island cycle wallpapers 1"))
+hl.bind(mainMod .. " + SHIFT + P",        hl.dsp.exec_cmd("quickshell ipc call island cycle wallpapers -1"))
+hl.bind(mainMod .. " + SHIFT + V",        hl.dsp.exec_cmd("quickshell ipc call island cycle clipboard 1"))  -- the clipboard history
+-- Super down and up, which those need: a global shortcut both ways, letting every other bind through.
+for _, sym in ipairs({ "Super_L", "Super_R" }) do
+    hl.bind(sym, hl.dsp.global("quickshell:island-super"),
+        { ignore_mods = true, transparent = true, non_consuming = true, dont_inhibit = true, locked = true })
+end
 hl.bind(mainMod .. " + G",                hl.dsp.exec_cmd("quickshell ipc call island open dashboard"))
 hl.bind(mainMod .. " + I",                hl.dsp.exec_cmd("quickshell ipc call island open settings"))
 hl.bind(mainMod .. " + M",                hl.dsp.exec_cmd("quickshell ipc call island open media"))

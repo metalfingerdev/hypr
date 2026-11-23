@@ -11,7 +11,9 @@ local M = {}
 
 M.apps = {
     { start = "awww-daemon", stop = "awww kill",       running = "awww query" },
-    { start = "quickshell",  stop = "quickshell kill", running = "quickshell list -j | grep -q '\"pid\"'" },
+    -- a systemd user service (modules/features/quickshell), which brings it back if it crashes
+    { start = "systemctl --user start quickshell", stop = "systemctl --user stop quickshell",
+      running = "systemctl --user is-active -q quickshell" },
 }
 
 function M.start()
