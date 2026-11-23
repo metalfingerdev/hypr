@@ -31,6 +31,16 @@ hl.window_rule({
     no_focus = true,
 })
 
+-- A fullscreen window takes focus on a click, not when the pointer moves over it. A window opened
+-- over it (Super+Return's floating kitty) gets the focus, but the pointer is still on the fullscreen
+-- window, and with follow_mouse = 1 (input.lua) the slightest nudge handed the keyboard back to it.
+hl.window_rule({
+    name  = "fullscreen-no-follow-mouse",
+    match = { fullscreen = true },
+
+    no_follow_mouse = true,
+})
+
 -- Shadows (look.lua) only where a window lies over something, as on macOS: floating windows, dialogs
 -- and pinned ones. A tiled window has nothing under it but its neighbours, 4 px away, and a shadow
 -- this wide would lie across them. These follow a window as it's toggled between the two.
