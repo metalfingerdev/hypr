@@ -134,4 +134,10 @@ hl.animation({ leaf = "workspaces",    enabled = true,  speed = 3.5,  bezier = "
 hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 3.5,  bezier = "Slide", style = "slide"  })
 hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 3.5,  bezier = "Slide", style = "slide"  })
 
+-- The scratchpad (Super+Escape) pops up from the bottom and drops back down, instead of sliding in
+-- sideways like the numbered workspaces; Hyprland also fades it. The words name where the motion
+-- starts: `bottom` moves it up, `top` moves it down.
+hl.animation({ leaf = "specialWorkspaceIn",  enabled = true, speed = 3.5, bezier = "Glide", style = "slidevert bottom" })
+hl.animation({ leaf = "specialWorkspaceOut", enabled = true, speed = 3.0, bezier = "Close", style = "slidevert top"    })
+
 hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 5,    bezier = "Snap"   })

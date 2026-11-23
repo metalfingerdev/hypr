@@ -124,10 +124,11 @@ hl.bind(mainMod .. " + CTRL + L",  hl.dsp.window.move({ x = 30,  y = 0, relative
 hl.bind(mainMod .. " + CTRL + K",  hl.dsp.window.move({ x = 0, y = -30, relative = true }), { repeating = true })
 hl.bind(mainMod .. " + CTRL + J",  hl.dsp.window.move({ x = 0, y = 30,  relative = true }), { repeating = true })
 
--- Example special workspace (scratchpad)
+-- Special workspace (scratchpad)
 -- Escape is the Caps Lock key (caps:swapescape in input.lua)
 hl.bind(mainMod .. " + Escape",         hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + Escape", hl.dsp.window.move({ workspace = "special:magic" }))
+-- follow = false: the window goes to the scratchpad, you stay where you are (the scratchpad stays shut)
+hl.bind(mainMod .. " + SHIFT + Escape", hl.dsp.window.move({ workspace = "special:magic", follow = false }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
