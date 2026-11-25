@@ -25,6 +25,8 @@ hl.bind(mainMod .. " + SHIFT + SPACE",    hl.dsp.window.float({ action = "toggle
 hl.bind(mainMod .. " + CTRL + SPACE",     hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + ALT + SPACE",      hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + F",                hl.dsp.window.fullscreen())
+-- Bound twice on purpose: Super+A pins the window and also toggles the island peek (below), which
+-- holds the view on screen while auto-hide is on.
 hl.bind(mainMod .. " + A",                hl.dsp.window.pin())
 -- Works while locked too: if the lock screen died, this brings a new one.
 hl.bind(mainMod .. " + Z",                hl.dsp.exec_cmd(lock), { locked = true })
@@ -62,6 +64,17 @@ hl.bind(mainMod .. " + U",                hl.dsp.exec_cmd("quickshell ipc call i
 hl.bind(mainMod .. " + T",                hl.dsp.exec_cmd("quickshell ipc call island open theme"))
 hl.bind(mainMod .. " + C",                hl.dsp.exec_cmd("quickshell ipc call island open clock"))
 hl.bind(mainMod .. " + X",                hl.dsp.exec_cmd("quickshell ipc call island open power"))
+-- Views that had no key. Shift or Ctrl only pairs views that are really related (calendar/agenda,
+-- theme/colours, cycle/browse); an unrelated one gets its own letter.
+hl.bind(mainMod .. " + S",                hl.dsp.exec_cmd("quickshell ipc call island open system"))      -- processor, memory, temperature, disk
+hl.bind(mainMod .. " + O",                hl.dsp.exec_cmd("quickshell ipc call island open weather"))     -- outside; not a W variant, W is the browser
+hl.bind(mainMod .. " + SHIFT + C",        hl.dsp.exec_cmd("quickshell ipc call island open agenda"))      -- C is the calendar
+hl.bind(mainMod .. " + CTRL + N",         hl.dsp.exec_cmd("quickshell ipc call island open activity"))    -- N is notifications: what's running
+hl.bind(mainMod .. " + SHIFT + T",        hl.dsp.exec_cmd("quickshell ipc call island open colours"))     -- T is the theme
+hl.bind(mainMod .. " + CTRL + P",         hl.dsp.exec_cmd("quickshell ipc call island open wallpapers"))  -- P cycles them, this picks
+hl.bind(mainMod .. " + CTRL + V",         hl.dsp.exec_cmd("quickshell ipc call island open clipboard"))   -- Shift+V cycles, this browses
+hl.bind(mainMod .. " + CTRL + D",         hl.dsp.exec_cmd("quickshell ipc call island launch files"))     -- D is the launcher
+hl.bind(mainMod .. " + SHIFT + D",        hl.dsp.exec_cmd("quickshell ipc call island launch actions"))
 
 hl.bind(mainMod .. " + SPACE", function()
     local win = hl.get_active_window()
@@ -102,6 +115,14 @@ for i = 1, 10 do
   hl.bind(mainMod .. " +" .. key,         hl.dsp.focus({ workspace = tostring(i) }))
   hl.bind(mainMod .. " + SHIFT +" .. key,   hl.dsp.window.move({ workspace = tostring(i) }))
 end
+
+-- Neighbouring workspaces and back-and-forth, as in sway/i3. The brackets sit where h/l's
+-- outer neighbours are: [ is back, ] is forward; with Shift the window goes along.
+hl.bind(mainMod .. " + bracketleft",         hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(mainMod .. " + bracketright",        hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mainMod .. " + SHIFT + bracketleft", hl.dsp.window.move({ workspace = "e-1" }))
+hl.bind(mainMod .. " + SHIFT + bracketright",hl.dsp.window.move({ workspace = "e+1" }))
+hl.bind(mainMod .. " + grave",               hl.dsp.focus({ workspace = "previous" }))   -- the last workspace, back and forth
 
 -- ─── Window Resize (hold to repeat) ──────────────────────────
 hl.bind(mainMod .. " + ALT + Left",  hl.dsp.window.resize({ x = -30, y = 0, relative = true }), { repeating = true })
