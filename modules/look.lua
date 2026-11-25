@@ -95,7 +95,8 @@ hl.config({
 })
 
 -- The glass layer: any layer surface (a shell, bar, launcher) named `glass`, or `glass:<something>`,
--- gets the same blur as the windows. Quickshell's island is `glass:island`.
+-- gets the same blur as the windows. Quickshell's island is `glass:island`. While hyprglass is loaded and on
+-- (plugins.lua), its glass takes the place of this blur.
 hl.layer_rule({
     name         = "glass",
     match        = { namespace = "^glass(:.+)?$" },

@@ -6,7 +6,7 @@
 --   input.lua      keyboard, mouse, touchpad, gestures, devices
 --   look.lua       gaps, borders, the glass (opacity, blur, `glass` layer rule), animations
 --   monitors.lua   monitors
---   plugins.lua    the window-rotate plugin and its binds
+--   plugins.lua    plugins: window rotation (and its binds), liquid glass (hyprglass)
 --   rules.lua      window and workspace rules
 --
 -- session.lua (here, not in modules/) lists the programs that come with the session: autostart.lua
