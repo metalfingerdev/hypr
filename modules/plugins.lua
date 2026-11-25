@@ -29,7 +29,8 @@ if load("hyprglass") and hl.plugin.hyprglass then
         default_preset = "pomme",
         layers = { enabled = true },
     })
-    -- The island's overlay is full-screen and draws its own shadow: contour gives each shape it draws
-    -- its own edge, and the cut-off (look.lua's ignore_alpha) keeps the glass out of the shadow.
-    hg.layer("glass:island", { mask_mode = "contour", mask_threshold = 0.4 })
+    -- The island's overlay is full-screen: contour gives each shape it draws its own edge. The cut-off is
+    -- look.lua's ignore_alpha, low, so an island set almost see-through keeps its glass (its shadow is
+    -- a window of its own).
+    hg.layer("glass:island", { mask_mode = "contour", mask_threshold = 0.01 })
 end

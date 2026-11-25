@@ -82,6 +82,14 @@ hl.window_rule({
     opaque = true,
 })
 
+-- Pictures too, as video: the glass would tint every photo with the wallpaper behind it.
+hl.window_rule({
+    name  = "opaque-qimgv",
+    match = { class = "^qimgv$" },
+
+    opaque = true,
+})
+
 
 -- Layer rules also return a handle.
 -- local overlayLayerRule = hl.layer_rule({

@@ -101,7 +101,9 @@ hl.layer_rule({
     name         = "glass",
     match        = { namespace = "^glass(:.+)?$" },
     blur         = true,
-    ignore_alpha = 0.4, -- a full-screen overlay is transparent outside what it draws: blur only that, and not its shadow
+    -- A full-screen overlay is transparent outside what it draws: blur only that. Low, so an island set
+    -- almost see-through (its Settings) keeps its glass; its shadow is a window of its own, not glass.
+    ignore_alpha = 0.01,
 })
 
 -- Curves: plain beziers, none of them overshoots (no springs).
