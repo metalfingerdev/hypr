@@ -13,3 +13,10 @@
 -- starts them, and Super+R restarts them along with the config.
 
 require("autoload")
+
+-- The island's glass and window settings, written by its Settings (quickshell's Glass.qml). Last, so they win
+-- over look.lua and plugins.lua; hyprglass only takes presets while the config loads, so the island writes
+-- this file and reloads. A broken or missing file leaves the config as it is.
+local island = os.getenv("HOME") .. "/.config/island/hyprland.lua"
+local f = io.open(island)
+if f then f:close(); pcall(dofile, island) end

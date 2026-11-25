@@ -21,8 +21,8 @@ end
 
 -- Liquid glass on the windows and the island. Where it draws it replaces Hyprland's blur
 -- (manage_blur), so look.lua's blur and `glass` layer rule are what's left when it's out or off.
--- The island's Settings switches it and picks the preset at runtime (hyprctl eval), and puts its
--- choice back when the shell starts, so these are only the defaults after a reload.
+-- The island's Settings writes its own presets on top (~/.config/island/hyprland.lua, loaded last by
+-- hyprland.lua), so these are only the defaults without it.
 if load("hyprglass") and hl.plugin.hyprglass then
     local hg = hl.plugin.hyprglass
     hg.config({
