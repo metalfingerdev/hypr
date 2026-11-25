@@ -75,6 +75,13 @@ hl.bind(mainMod .. " + CTRL + P",         hl.dsp.exec_cmd("quickshell ipc call i
 hl.bind(mainMod .. " + CTRL + V",         hl.dsp.exec_cmd("quickshell ipc call island open clipboard"))   -- Shift+V cycles, this browses
 hl.bind(mainMod .. " + CTRL + D",         hl.dsp.exec_cmd("quickshell ipc call island launch files"))     -- D is the launcher
 hl.bind(mainMod .. " + SHIFT + D",        hl.dsp.exec_cmd("quickshell ipc call island launch actions"))
+-- The rest of the views, each beside the one it is reached from (the island's own buttons lead there too).
+hl.bind(mainMod .. " + SHIFT + G",        hl.dsp.exec_cmd("quickshell ipc call island editControls"))     -- G is the Control Centre, in Edit
+hl.bind(mainMod .. " + ALT + G",          hl.dsp.exec_cmd("quickshell ipc call island open tray"))        -- background apps: a tile of the Control Centre
+hl.bind(mainMod .. " + ALT + C",          hl.dsp.exec_cmd("quickshell ipc call island open tasks"))       -- C is the calendar: what's to do
+hl.bind(mainMod .. " + SHIFT + S",        hl.dsp.exec_cmd("quickshell ipc call island open generations")) -- S is the system: NixOS, its generations
+hl.bind(mainMod .. " + ALT + D",          hl.dsp.exec_cmd("quickshell ipc call island open dock"))        -- D is the launcher: the pinned apps
+hl.bind(mainMod .. " + SHIFT + I",        hl.dsp.exec_cmd("quickshell ipc call island open advanced"))    -- I is Settings: every setting
 
 hl.bind(mainMod .. " + SPACE", function()
     local win = hl.get_active_window()
