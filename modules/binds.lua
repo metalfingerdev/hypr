@@ -44,7 +44,7 @@ hl.bind(mainMod .. " + P",                hl.dsp.exec_cmd("quickshell ipc call i
 hl.bind(mainMod .. " + SHIFT + P",        hl.dsp.exec_cmd("quickshell ipc call island cycle wallpapers -1"))
 hl.bind(mainMod .. " + SHIFT + V",        hl.dsp.exec_cmd("quickshell ipc call island cycle clipboard 1"))  -- the clipboard history
 hl.bind(mainMod .. " + period",           hl.dsp.exec_cmd("quickshell ipc call island launch emoji"))      -- emoji, symbols, kaomoji
--- only where nixos-dotfiles' ai bundle installed the agent
+-- only where nixos-dotfiles' agents bundle installed the agent
 if os.execute("command -v nilo-agent >/dev/null 2>&1") == true then
     hl.bind(mainMod .. " + slash",            hl.dsp.exec_cmd("quickshell ipc call island open agent"))        -- ask the local model
 end
@@ -91,7 +91,7 @@ hl.bind(mainMod .. " + SHIFT + Return",   hl.dsp.exec_cmd(terminal .. " --hold -
 -- A quick terminal: floating and centred at 1080x720, not tiled. The rules only touch this launch.
 hl.bind(mainMod .. " + Return",           hl.dsp.exec_cmd(terminal, { float = true, size = "1080 720", center = true }))
 -- The coding agent (crush, talking to the local Ollama), in the same kind of floating terminal
--- Only where the agents are installed (nixos-dotfiles' ai bundle): elsewhere the key does nothing.
+-- Only where the agents are installed (nixos-dotfiles' agents bundle): elsewhere the key does nothing.
 if os.execute("command -v crush >/dev/null 2>&1") == true then
     hl.bind(mainMod .. " + ALT + Return",     hl.dsp.exec_cmd(terminal .. " -e crush", { float = true, size = "1080 720", center = true }))
 end
