@@ -4,6 +4,16 @@ local menu        = "quickshell ipc call island open launcher"
 local lock        = "quickshell ipc call lock screen"
 local browser     = "firefox"
 local fastfetch   = "fastfetch"
+
+-- Whether a program is on PATH. Not os.execute("command -v ..."): Hyprland reaps its children itself, so
+-- os.execute never gets the exit status back (nil, "No child processes") and would always say no.
+local function installed(cmd)
+    for dir in (os.getenv("PATH") or ""):gmatch("[^:]+") do
+        local f = io.open(dir .. "/" .. cmd)
+        if f then f:close(); return true end
+    end
+    return false
+end
 local session     = dofile(os.getenv("HOME") .. "/.config/hypr/session.lua")   -- awww, quickshell
 
 
@@ -45,7 +55,7 @@ hl.bind(mainMod .. " + SHIFT + P",        hl.dsp.exec_cmd("quickshell ipc call i
 hl.bind(mainMod .. " + SHIFT + V",        hl.dsp.exec_cmd("quickshell ipc call island cycle clipboard 1"))  -- the clipboard history
 hl.bind(mainMod .. " + period",           hl.dsp.exec_cmd("quickshell ipc call island launch emoji"))      -- emoji, symbols, kaomoji
 -- only where nixos-dotfiles' agent bundle installed the agent
-if os.execute("command -v nilo-agent >/dev/null 2>&1") == true then
+if installed("nilo-agent") then
     hl.bind(mainMod .. " + slash",            hl.dsp.exec_cmd("quickshell ipc call island open agent"))        -- ask the local model
 end
 -- Super down and up, which those need: a global shortcut both ways, letting every other bind through.
@@ -92,7 +102,7 @@ hl.bind(mainMod .. " + SHIFT + Return",   hl.dsp.exec_cmd(terminal .. " --hold -
 hl.bind(mainMod .. " + Return",           hl.dsp.exec_cmd(terminal, { float = true, size = "1080 720", center = true }))
 -- The coding agent (crush, talking to the local Ollama), in the same kind of floating terminal
 -- Only where the agents are installed (nixos-dotfiles' agent bundle): elsewhere the key does nothing.
-if os.execute("command -v crush >/dev/null 2>&1") == true then
+if installed("crush") then
     hl.bind(mainMod .. " + ALT + Return",     hl.dsp.exec_cmd(terminal .. " -e crush", { float = true, size = "1080 720", center = true }))
 end
 hl.bind(mainMod .. " + E",                hl.dsp.exec_cmd(terminal .. " -e " .. fileManager))
