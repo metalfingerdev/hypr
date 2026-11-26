@@ -1,17 +1,11 @@
-------------------
----- MONITORS ----
-------------------
-
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
--- The laptop's own panel.
-hl.monitor({
-    output   = "eDP-1",
-    mode     = "1920x1080@144",
-    position = "0x0",
-    scale    = "1",
-})
+-- This machine's own screens (a laptop panel at a fixed mode...) come from ~/.config/hypr-host/monitors.lua,
+-- written by its host in nixos-dotfiles: this folder is a read-only link, so that file can't live here.
+local host = os.getenv("HOME") .. "/.config/hypr-host/monitors.lua"
+local f = io.open(host)
+if f then f:close(); pcall(dofile, host) end
 
--- Anything plugged in: its own best mode, placed beside the panel instead of on top of it.
+-- Anything else plugged in: its own best mode, placed beside the others instead of on top of them.
 hl.monitor({
     output   = "",
     mode     = "preferred",

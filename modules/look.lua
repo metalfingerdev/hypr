@@ -1,19 +1,10 @@
------------------------
----- COLOUR PALETTE ----
------------------------
-
+-- The marin colours, for the borders below
 local beige  = "rgb(D8CAB8)"
 local lime   = "rgb(C4E881)"
 local purple = "rgb(AC82E9)"
 local violet = "rgb(8F56E1)"
 
-
------------------------
----- LOOK AND FEEL ----
------------------------
-
--- Refer to https://wiki.hypr.land/Configuring/Basics/Variables/
--- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
+-- Options: wiki.hypr.land/Configuring/Basics/Variables, wiki.hypr.land/Configuring/Layouts/Dwindle-Layout
 hl.config({
     general = {
         gaps_in  = 4,
@@ -26,11 +17,8 @@ hl.config({
           inactive_border = { colors = { violet }, angle = 90 },
         },
 
-        -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
-        resize_on_border = true,
-
-        -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
-        allow_tearing = false,
+        resize_on_border = true,   -- drag a border or gap to resize
+        allow_tearing = false,     -- read wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing first
 
         layout = "dwindle",
     },
@@ -81,12 +69,13 @@ hl.config({
     },
 
     dwindle = {
-        preserve_split = true, -- You probably want this
+        preserve_split = true, -- a split keeps its direction as windows come and go
     },
 
     misc = {
-        force_default_wallpaper = 1,    -- Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo   = true, -- If true disables the random hyprland logo / anime girl background. :(
+        -- nothing of Hyprland's own behind awww's wallpaper: no mascot, no logo
+        force_default_wallpaper = 1,
+        disable_hyprland_logo   = true,
         -- The lock screen lives in Quickshell. Should it die while locked, a new one may take the
         -- lock over (it locks again as it starts); without this the session stays behind Hyprland's
         -- fallback screen, which nothing unlocks: a TTY or a reboot.

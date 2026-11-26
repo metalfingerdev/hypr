@@ -11,6 +11,12 @@
 --
 -- session.lua (here, not in modules/) lists the programs that come with the session: autostart.lua
 -- starts them, and Super+R restarts them along with the config.
+--
+-- This repo is the same on every machine. What one machine needs is in ~/.config/hypr-host/, written by
+-- its host in nixos-dotfiles (this folder is a read-only link, so it can't live here):
+--   monitors.lua   its screens (monitors.lua loads it before its catch-all rule)
+--   input.lua      its keyboard: layout, Caps as Escape... (input.lua loads it; hl.config merges per key)
+-- Both are optional: without them every screen gets its preferred mode and the keyboard is US.
 
 require("autoload")
 

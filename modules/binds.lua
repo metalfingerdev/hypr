@@ -1,7 +1,3 @@
----------------------
----- MY PROGRAMS ----
----------------------
-
 local terminal    = "kitty"
 local fileManager = "yazi"
 local menu        = "quickshell ipc call island open launcher"
@@ -11,11 +7,8 @@ local fastfetch   = "fastfetch"
 local session     = dofile(os.getenv("HOME") .. "/.config/hypr/session.lua")   -- awww, quickshell
 
 
----------------------
----- KEYBINDINGS ----
----------------------
 
--- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
+-- Every bind is listed in nixos-dotfiles docs/desktop.md. Syntax: wiki.hypr.land/Configuring/Basics/Binds
 local mainMod = "SUPER"
 
 hl.bind(mainMod .. " + Q",                hl.dsp.window.close())
@@ -51,7 +44,10 @@ hl.bind(mainMod .. " + P",                hl.dsp.exec_cmd("quickshell ipc call i
 hl.bind(mainMod .. " + SHIFT + P",        hl.dsp.exec_cmd("quickshell ipc call island cycle wallpapers -1"))
 hl.bind(mainMod .. " + SHIFT + V",        hl.dsp.exec_cmd("quickshell ipc call island cycle clipboard 1"))  -- the clipboard history
 hl.bind(mainMod .. " + period",           hl.dsp.exec_cmd("quickshell ipc call island launch emoji"))      -- emoji, symbols, kaomoji
-hl.bind(mainMod .. " + slash",            hl.dsp.exec_cmd("quickshell ipc call island open agent"))        -- ask the local model
+-- only where nixos-dotfiles' ai bundle installed the agent
+if os.execute("command -v nilo-agent >/dev/null 2>&1") == true then
+    hl.bind(mainMod .. " + slash",            hl.dsp.exec_cmd("quickshell ipc call island open agent"))        -- ask the local model
+end
 -- Super down and up, which those need: a global shortcut both ways, letting every other bind through.
 for _, sym in ipairs({ "Super_L", "Super_R" }) do
     hl.bind(sym, hl.dsp.global("quickshell:island-super"),
@@ -95,7 +91,10 @@ hl.bind(mainMod .. " + SHIFT + Return",   hl.dsp.exec_cmd(terminal .. " --hold -
 -- A quick terminal: floating and centred at 1080x720, not tiled. The rules only touch this launch.
 hl.bind(mainMod .. " + Return",           hl.dsp.exec_cmd(terminal, { float = true, size = "1080 720", center = true }))
 -- The coding agent (crush, talking to the local Ollama), in the same kind of floating terminal
-hl.bind(mainMod .. " + ALT + Return",     hl.dsp.exec_cmd(terminal .. " -e crush", { float = true, size = "1080 720", center = true }))
+-- Only where the agents are installed (nixos-dotfiles' ai bundle): elsewhere the key does nothing.
+if os.execute("command -v crush >/dev/null 2>&1") == true then
+    hl.bind(mainMod .. " + ALT + Return",     hl.dsp.exec_cmd(terminal .. " -e crush", { float = true, size = "1080 720", center = true }))
+end
 hl.bind(mainMod .. " + E",                hl.dsp.exec_cmd(terminal .. " -e " .. fileManager))
 hl.bind(mainMod .. " + D",                hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + W",                hl.dsp.exec_cmd(browser))
@@ -144,7 +143,7 @@ for _, g in ipairs({ { "ALT", hl.dsp.window.resize }, { "CTRL", hl.dsp.window.mo
 end
 
 -- Special workspace (scratchpad)
--- Escape is the Caps Lock key (caps:swapescape in input.lua)
+-- Escape: the Caps Lock key on a machine whose ~/.config/hypr-host/input.lua swaps them (caps:swapescape)
 hl.bind(mainMod .. " + Escape",         hl.dsp.workspace.toggle_special("magic"))
 -- follow = false: the window goes to the scratchpad, you stay where you are (the scratchpad stays shut)
 hl.bind(mainMod .. " + SHIFT + Escape", hl.dsp.window.move({ workspace = "special:magic", follow = false }))

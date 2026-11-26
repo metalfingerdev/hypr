@@ -1,7 +1,3 @@
--------------------
----- AUTOSTART ----
--------------------
-
 -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
 -- The programs are listed in ../session.lua (Super+R starts them over).
 local session = dofile(os.getenv("HOME") .. "/.config/hypr/session.lua")

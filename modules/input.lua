@@ -1,11 +1,6 @@
----------------
----- INPUT ----
----------------
-
 hl.config({
     input = {
         kb_layout  = "us",
-        kb_options = "caps:swapescape",
 
         follow_mouse = 1,
 
@@ -16,6 +11,12 @@ hl.config({
         },
     },
 })
+
+-- This machine's keyboard (another layout, Caps as Escape...) from ~/.config/hypr-host/input.lua, written
+-- by the host in nixos-dotfiles; hl.config merges key by key, so it only needs what differs.
+local host = os.getenv("HOME") .. "/.config/hypr-host/input.lua"
+local f = io.open(host)
+if f then f:close(); pcall(dofile, host) end
 
 hl.gesture({
     fingers = 3,
