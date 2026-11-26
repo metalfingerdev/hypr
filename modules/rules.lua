@@ -66,53 +66,8 @@ hl.window_rule({
 
     opaque = true,
 })
-hl.window_rule({
-    -- VLC never says so, so it goes by class
-    name  = "opaque-vlc",
-    match = { class = "^vlc$" },
-
-    opaque = true,
-})
-
--- Firefox is always solid, whatever the tab shows.
-hl.window_rule({
-    name  = "opaque-firefox",
-    match = { class = "^firefox$" },
-
-    opaque = true,
-})
-
--- Pictures too, as video: the glass would tint every photo with the wallpaper behind it.
-hl.window_rule({
-    name  = "opaque-qimgv",
-    match = { class = "^qimgv$" },
-
-    opaque = true,
-})
-
-
--- Layer rules also return a handle.
--- local overlayLayerRule = hl.layer_rule({
---     name  = "no-anim-overlay",
---     match = { namespace = "^my-overlay$" },
---     no_anim = true,
--- })
--- overlayLayerRule:set_enabled(false)
-
--- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
--- "Smart gaps" / "No gaps when only"
--- uncomment all if you wish to use that.
--- hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
--- hl.workspace_rule({ workspace = "f[1]",   gaps_out = 0, gaps_in = 0 })
--- hl.window_rule({
---     name  = "no-gaps-wtv1",
---     match = { float = false, workspace = "w[tv1]" },
---     border_size = 0,
---     rounding    = 0,
--- })
--- hl.window_rule({
---     name  = "no-gaps-f1",
---     match = { float = false, workspace = "f[1]" },
---     border_size = 0,
---     rounding    = 0,
--- })
+-- Solid whatever the content: VLC never says it's showing video, Firefox is solid whatever the tab
+-- shows, and pictures too: the glass would tint every photo with the wallpaper behind it.
+for _, name in ipairs({ "vlc", "firefox", "qimgv" }) do
+    hl.window_rule({ name = "opaque-" .. name, match = { class = "^" .. name .. "$" }, opaque = true })
+end

@@ -131,27 +131,17 @@ hl.bind(mainMod .. " + SHIFT + bracketleft", hl.dsp.window.move({ workspace = "e
 hl.bind(mainMod .. " + SHIFT + bracketright",hl.dsp.window.move({ workspace = "e+1" }))
 hl.bind(mainMod .. " + grave",               hl.dsp.focus({ workspace = "previous" }))   -- the last workspace, back and forth
 
--- ─── Window Resize (hold to repeat) ──────────────────────────
-hl.bind(mainMod .. " + ALT + Left",  hl.dsp.window.resize({ x = -30, y = 0, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + ALT + Right", hl.dsp.window.resize({ x = 30,  y = 0, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + ALT + Up",    hl.dsp.window.resize({ x = 0, y = -30, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + ALT + Down",  hl.dsp.window.resize({ x = 0, y = 30,  relative = true }), { repeating = true })
-
-hl.bind(mainMod .. " + ALT + H",  hl.dsp.window.resize({ x = -30, y = 0, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + ALT + L",  hl.dsp.window.resize({ x = 30,  y = 0, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + ALT + K",  hl.dsp.window.resize({ x = 0, y = -30, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + ALT + J",  hl.dsp.window.resize({ x = 0, y = 30,  relative = true }), { repeating = true })
-
--- ─── Window Move / Float (hold to repeat) ─────────────────────
-hl.bind(mainMod .. " + CTRL + Left",  hl.dsp.window.move({ x = -30, y = 0, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + CTRL + Right", hl.dsp.window.move({ x = 30,  y = 0, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + CTRL + Up",    hl.dsp.window.move({ x = 0, y = -30, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + CTRL + Down",  hl.dsp.window.move({ x = 0, y = 30,  relative = true }), { repeating = true })
-
-hl.bind(mainMod .. " + CTRL + H",  hl.dsp.window.move({ x = -30, y = 0, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + CTRL + L",  hl.dsp.window.move({ x = 30,  y = 0, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + CTRL + K",  hl.dsp.window.move({ x = 0, y = -30, relative = true }), { repeating = true })
-hl.bind(mainMod .. " + CTRL + J",  hl.dsp.window.move({ x = 0, y = 30,  relative = true }), { repeating = true })
+-- ─── Window Resize and Move (hold to repeat): Super+Alt resizes, Super+Ctrl moves, by 30 px ───
+-- Arrows first, then h/j/k/l (the same four directions, as for focus above).
+local nudges = {
+    { "Left", -30, 0 }, { "Right", 30, 0 }, { "Up", 0, -30 }, { "Down", 0, 30 },
+    { "H",    -30, 0 }, { "L",     30, 0 }, { "K",  0, -30 }, { "J",    0, 30 },
+}
+for _, g in ipairs({ { "ALT", hl.dsp.window.resize }, { "CTRL", hl.dsp.window.move } }) do
+    for _, n in ipairs(nudges) do
+        hl.bind(mainMod .. " + " .. g[1] .. " + " .. n[1], g[2]({ x = n[2], y = n[3], relative = true }), { repeating = true })
+    end
+end
 
 -- Special workspace (scratchpad)
 -- Escape is the Caps Lock key (caps:swapescape in input.lua)
