@@ -6,14 +6,14 @@ Normally deployed as a flake input (`flake = false`) by
 [nixos-dotfiles](https://github.com/metalfingerdev/nixos-dotfiles), which links it read-only to
 `~/.config/hypr` ([docs/dotfiles.md](https://github.com/metalfingerdev/nixos-dotfiles/blob/main/docs/dotfiles.md)).
 
-It is the same on every machine: per-machine monitors and keyboard go in the optional
-`~/.config/hypr-host/{monitors,input}.lua` (without them: preferred mode, US layout). The island
-(quickshell repo) writes `~/.config/island/hyprland.lua`, loaded last. Needs a Hyprland with Lua config
-support, and the plugins from `modules/plugins.lua` if you keep them.
+The config is the same on every machine. Per-machine monitors and keyboard go in the optional
+`~/.config/hypr-host/{monitors,input}.lua`; without them you get the preferred mode and a US layout. The
+island (quickshell repo) writes `~/.config/island/hyprland.lua`, which loads last. You need a Hyprland
+with Lua config support, and the plugins from `modules/plugins.lua` if you keep them.
 
 ## Without NixOS
 
-Clone it into the XDG config dir, or clone elsewhere and symlink it (or copy the files):
+Clone it into the XDG config dir, or clone it elsewhere and symlink or copy it:
 
 ```sh
 git clone https://github.com/metalfingerdev/hypr.git "${XDG_CONFIG_HOME:-$HOME/.config}/hypr"
