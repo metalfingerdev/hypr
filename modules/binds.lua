@@ -87,6 +87,7 @@ hl.bind(mainMod .. " + ALT + G",          hl.dsp.exec_cmd("quickshell ipc call i
 hl.bind(mainMod .. " + ALT + C",          hl.dsp.exec_cmd("quickshell ipc call island open tasks"))       -- C is the calendar: what's to do
 hl.bind(mainMod .. " + SHIFT + S",        hl.dsp.exec_cmd("quickshell ipc call island open generations")) -- S is the system: NixOS, its generations
 hl.bind(mainMod .. " + ALT + D",          hl.dsp.exec_cmd("quickshell ipc call island open dock"))        -- D is the launcher: the pinned apps
+hl.bind(mainMod .. " + SHIFT + slash",    hl.dsp.exec_cmd("quickshell ipc call island open shortcuts"))   -- these binds, as a list (views/Shortcuts.qml: keep it in step by hand)
 hl.bind(mainMod .. " + SHIFT + I",        hl.dsp.exec_cmd("quickshell ipc call island open advanced"))    -- I is Settings: every setting
 
 hl.bind(mainMod .. " + SPACE", function()
